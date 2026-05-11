@@ -1,11 +1,21 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
 
 Route::middleware(['auth'])->group(function(){
-    Route::resource('estudiantes', EstudianteController::class);
+    Route::resource('persons', PersonController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('categories', CategoryController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('subcategories', SubcategoryController::class);
 });
 
 /*
