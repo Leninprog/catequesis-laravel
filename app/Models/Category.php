@@ -16,11 +16,7 @@ class Category extends Model
         'descripcion'
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | RELACIONES
-    |--------------------------------------------------------------------------
-    */
+    // RELACIONES
 
     public function subcategories()
     {

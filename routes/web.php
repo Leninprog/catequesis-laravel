@@ -5,6 +5,12 @@ use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\PersonConditionController;
+use App\Http\Controllers\EvaluatorController;
+use App\Http\Controllers\ConditionFollowupController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventTargetController;
+use App\Http\Controllers\EventEvaluatorController;
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('persons', PersonController::class);
@@ -18,8 +24,30 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('subcategories', SubcategoryController::class);
 });
 
+Route::middleware(['auth'])->group(function(){
+    Route::resource('person-conditions', PersonConditionController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('evaluators', EvaluatorController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('condition-followups', ConditionFollowupController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('events', EventController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('event-targets', EventTargetController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('event-evaluators', EventEvaluatorController::class);
+});
 /*
-|--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |

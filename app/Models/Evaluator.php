@@ -5,23 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subcategory extends Model
+class Evaluator extends Model
 {
     use HasFactory;
 
-    protected $table = 'subcategories';
+    protected $table = 'evaluators';
 
     protected $fillable = [
-        'category_id',
-        'nombre',
-        'descripcion'
+        'nombres',
+        'apellidos',
+        'especialidad',
+        'telefono',
+        'email',
+        'estado',
+        'user_id'
     ];
 
     // RELACIONES
 
-    public function category()
+    public function user()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(User::class);
     }
 
     public function conditions()

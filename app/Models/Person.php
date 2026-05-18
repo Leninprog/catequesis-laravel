@@ -22,11 +22,7 @@ class Person extends Model
         'created_by'
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | RELACIONES
-    |--------------------------------------------------------------------------
-    */
+    // RELACIONES
 
     public function creator()
     {
@@ -36,10 +32,5 @@ class Person extends Model
     public function conditions()
     {
         return $this->hasMany(PersonCondition::class);
-    }
-
-    public function enrollments()
-    {
-        return $this->hasMany(Enrollment::class);
     }
 }
