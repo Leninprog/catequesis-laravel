@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEventEvaluatorRequest extends FormRequest
+class StoreEnrollmentRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,17 +15,17 @@ class StoreEventEvaluatorRequest extends FormRequest
     {
         return [
 
+            'person_id' =>
+            'required|exists:persons,id',
+
             'event_id' =>
             'required|exists:events,id',
 
-            'evaluator_id' =>
-            'required|exists:evaluators,id',
+            'estado' =>
+            'required|in:pendiente,aprobada,rechazada,cancelada',
 
-            'rol' =>
-            'required|in:principal,apoyo,observador',
-
-            'activo' =>
-            'required|boolean'
+            'observaciones' =>
+            'nullable|string|max:500'
         ];
     }
 
@@ -33,14 +33,14 @@ class StoreEventEvaluatorRequest extends FormRequest
     {
         return [
 
+            'person_id.required' =>
+            'Debe seleccionar una persona.',
+
             'event_id.required' =>
             'Debe seleccionar un evento.',
 
-            'evaluator_id.required' =>
-            'Debe seleccionar un evaluador.',
-
-            'rol.required' =>
-            'Debe seleccionar un rol.'
+            'estado.required' =>
+            'Debe seleccionar un estado.'
         ];
     }
 }

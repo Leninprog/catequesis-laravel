@@ -1,89 +1,93 @@
-<h1>Nueva Condición Social</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@section('content')
+    <h1>Nueva Condición Social</h1>
 
-<form action="{{ route('person-conditions.store') }}" method="POST">
-    @csrf
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <div>
-        <label>Persona</label>
+    <form action="{{ route('person-conditions.store') }}" method="POST">
+        @csrf
 
-        <select name="person_id" required>
-            <option value="">Seleccione</option>
+        <div>
+            <label>Persona</label>
 
-            @foreach ($persons as $person)
-                <option value="{{ $person->id }}">
-                    {{ $person->nombres }} {{ $person->apellidos }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+            <select name="person_id" required>
+                <option value="">Seleccione</option>
 
-    <div>
-        <label>Subcategoría</label>
+                @foreach ($persons as $person)
+                    <option value="{{ $person->id }}">
+                        {{ $person->nombres }} {{ $person->apellidos }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <select name="subcategory_id" required>
-            <option value="">Seleccione</option>
+        <div>
+            <label>Subcategoría</label>
 
-            @foreach ($subcategories as $subcategory)
-                <option value="{{ $subcategory->id }}">
-                    {{ $subcategory->nombre }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+            <select name="subcategory_id" required>
+                <option value="">Seleccione</option>
 
-    <div>
-        <label>Evaluador</label>
+                @foreach ($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}">
+                        {{ $subcategory->nombre }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <select name="evaluator_id">
-            <option value="">Seleccione</option>
+        <div>
+            <label>Evaluador</label>
 
-            @foreach ($evaluators as $evaluator)
-                <option value="{{ $evaluator->id }}">
-                    {{ $evaluator->nombres }} {{ $evaluator->apellidos }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+            <select name="evaluator_id">
+                <option value="">Seleccione</option>
 
-    <div>
-        <label>Nivel</label>
+                @foreach ($evaluators as $evaluator)
+                    <option value="{{ $evaluator->id }}">
+                        {{ $evaluator->nombres }} {{ $evaluator->apellidos }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <input type="number" name="nivel" min="1" max="5" required>
-    </div>
+        <div>
+            <label>Nivel</label>
 
-    <div>
-        <label>Prioridad</label>
+            <input type="number" name="nivel" min="1" max="5" required>
+        </div>
 
-        <input type="number" name="prioridad" min="1" max="5" required>
-    </div>
+        <div>
+            <label>Prioridad</label>
 
-    <div>
-        <label>Estado</label>
+            <input type="number" name="prioridad" min="1" max="5" required>
+        </div>
 
-        <select name="estado" required>
-            <option value="activa">Activa</option>
-            <option value="en_seguimiento">En seguimiento</option>
-            <option value="resuelta">Resuelta</option>
-        </select>
-    </div>
+        <div>
+            <label>Estado</label>
 
-    <div>
-        <label>Observaciones</label>
+            <select name="estado" required>
+                <option value="activa">Activa</option>
+                <option value="en_seguimiento">En seguimiento</option>
+                <option value="resuelta">Resuelta</option>
+            </select>
+        </div>
 
-        <textarea name="observaciones"></textarea>
-    </div>
+        <div>
+            <label>Observaciones</label>
 
-    <button type="submit">
-        Guardar
-    </button>
-</form>
+            <textarea name="observaciones"></textarea>
+        </div>
+
+        <button type="submit">
+            Guardar
+        </button>
+    </form>
+@endsection

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventEvaluator;
 use App\Models\Event;
 use App\Models\Evaluator;
+use App\Models\EventEvaluator;
 use App\Http\Requests\StoreEventEvaluatorRequest;
 
 class EventEvaluatorController extends Controller
@@ -38,18 +38,25 @@ class EventEvaluatorController extends Controller
     {
         EventEvaluator::create([
 
-            'event_id' => $request->event_id,
+            'event_id' =>
+            $request->event_id,
 
-            'evaluator_id' => $request->evaluator_id,
+            'evaluator_id' =>
+            $request->evaluator_id,
 
-            'rol' => $request->rol,
+            'rol' =>
+            $request->rol,
 
-            'estado' => $request->estado
+            'activo' =>
+            $request->activo
         ]);
 
         return redirect()
             ->route('event-evaluators.index')
-            ->with('success', 'Asignación creada correctamente.');
+            ->with(
+                'success',
+                'Evaluador asignado correctamente.'
+            );
     }
 
     public function edit(EventEvaluator $eventEvaluator)
@@ -75,18 +82,25 @@ class EventEvaluatorController extends Controller
 
         $eventEvaluator->update([
 
-            'event_id' => $request->event_id,
+            'event_id' =>
+            $request->event_id,
 
-            'evaluator_id' => $request->evaluator_id,
+            'evaluator_id' =>
+            $request->evaluator_id,
 
-            'rol' => $request->rol,
+            'rol' =>
+            $request->rol,
 
-            'estado' => $request->estado
+            'activo' =>
+            $request->activo
         ]);
 
         return redirect()
             ->route('event-evaluators.index')
-            ->with('success', 'Asignación actualizada correctamente.');
+            ->with(
+                'success',
+                'Asignación actualizada correctamente.'
+            );
     }
 
     public function destroy(EventEvaluator $eventEvaluator)
@@ -95,6 +109,9 @@ class EventEvaluatorController extends Controller
 
         return redirect()
             ->route('event-evaluators.index')
-            ->with('success', 'Asignación eliminada correctamente.');
+            ->with(
+                'success',
+                'Asignación eliminada correctamente.'
+            );
     }
 }

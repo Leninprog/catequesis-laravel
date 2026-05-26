@@ -32,4 +32,9 @@ class Evaluator extends Model
     {
         return $this->hasMany(PersonCondition::class);
     }
+
+    public function eventEvaluators()
+    {
+        return $this->hasMany(EventEvaluator::class);
+    }
 }

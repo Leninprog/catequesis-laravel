@@ -1,88 +1,91 @@
-<h1>Editar Objetivo de Evento</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
+@section('content')
+    <h1>Editar Objetivo de Evento</h1>
 
-    <div>
+    @if ($errors->any())
+        <div>
 
-        <ul>
+            <ul>
 
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
 
-        </ul>
+            </ul>
 
-    </div>
+        </div>
+    @endif
 
-@endif
+    <form action="{{ route('event-targets.update', $eventTarget->id) }}" method="POST">
 
-<form action="{{ route('event-targets.update', $eventTarget->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-    @csrf
-    @method('PUT')
+        <div>
 
-    <div>
+            <label>Evento</label>
 
-        <label>Evento</label>
+            <select name="event_id" required>
 
-        <select name="event_id" required>
-
-            <option value="">
-                Seleccione
-            </option>
-
-            @foreach ($events as $event)
-                <option value="{{ $event->id }}"
-                    {{ old('event_id', $eventTarget->event_id) == $event->id ? 'selected' : '' }}>
-                    {{ $event->nombre }}
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($events as $event)
+                    <option value="{{ $event->id }}"
+                        {{ old('event_id', $eventTarget->event_id) == $event->id ? 'selected' : '' }}>
+                        {{ $event->nombre }}
+                    </option>
+                @endforeach
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>Subcategoría</label>
+        <div>
 
-        <select name="subcategory_id" required>
+            <label>Subcategoría</label>
 
-            <option value="">
-                Seleccione
-            </option>
+            <select name="subcategory_id" required>
 
-            @foreach ($subcategories as $subcategory)
-                <option value="{{ $subcategory->id }}"
-                    {{ old('subcategory_id', $eventTarget->subcategory_id) == $subcategory->id ? 'selected' : '' }}>
-                    {{ $subcategory->nombre }}
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}"
+                        {{ old('subcategory_id', $eventTarget->subcategory_id) == $subcategory->id ? 'selected' : '' }}>
+                        {{ $subcategory->nombre }}
+                    </option>
+                @endforeach
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>Nivel Mínimo</label>
+        <div>
 
-        <input type="number" name="nivel_min" min="1" max="5"
-            value="{{ old('nivel_min', $eventTarget->nivel_min) }}" required>
+            <label>Nivel Mínimo</label>
 
-    </div>
+            <input type="number" name="nivel_min" min="1" max="5"
+                value="{{ old('nivel_min', $eventTarget->nivel_min) }}" required>
 
-    <div>
+        </div>
 
-        <label>Nivel Máximo</label>
+        <div>
 
-        <input type="number" name="nivel_max" min="1" max="5"
-            value="{{ old('nivel_max', $eventTarget->nivel_max) }}" required>
+            <label>Nivel Máximo</label>
 
-    </div>
+            <input type="number" name="nivel_max" min="1" max="5"
+                value="{{ old('nivel_max', $eventTarget->nivel_max) }}" required>
 
-    <button type="submit">
-        Actualizar
-    </button>
+        </div>
 
-</form>
+        <button type="submit">
+            Actualizar
+        </button>
+
+    </form>
+
+@endsection

@@ -1,89 +1,93 @@
-<h1>Objetivos de Eventos</h1>
+@extends('layouts.app')
 
-@if (session('success'))
-    <div>
-        {{ session('success') }}
-    </div>
-@endif
+@section('content')
+    <h1>Objetivos de Eventos</h1>
 
-<a href="{{ route('event-targets.create') }}">
-    Nuevo Objetivo
-</a>
+    @if (session('success'))
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
 
-<table border="1" cellpadding="10">
+    <a href="{{ route('event-targets.create') }}">
+        Nuevo Objetivo
+    </a>
 
-    <thead>
+    <table border="1" cellpadding="10">
 
-        <tr>
-
-            <th>ID</th>
-
-            <th>Evento</th>
-
-            <th>Subcategoría</th>
-
-            <th>Nivel Mínimo</th>
-
-            <th>Nivel Máximo</th>
-
-            <th>Acciones</th>
-
-        </tr>
-
-    </thead>
-
-    <tbody>
-
-        @forelse($targets as $target)
-            <tr>
-
-                <td>{{ $target->id }}</td>
-
-                <td>
-                    {{ $target->event->nombre ?? 'Sin evento' }}
-                </td>
-
-                <td>
-                    {{ $target->subcategory->nombre ?? 'Sin subcategoría' }}
-                </td>
-
-                <td>{{ $target->nivel_min }}</td>
-
-                <td>{{ $target->nivel_max }}</td>
-
-                <td>
-
-                    <a href="{{ route('event-targets.edit', $target->id) }}">
-                        Editar
-                    </a>
-
-                    <form action="{{ route('event-targets.destroy', $target->id) }}" method="POST"
-                        style="display:inline;">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit">
-                            Eliminar
-                        </button>
-
-                    </form>
-
-                </td>
-
-            </tr>
-
-        @empty
+        <thead>
 
             <tr>
 
-                <td colspan="6">
-                    No existen objetivos registrados.
-                </td>
+                <th>ID</th>
+
+                <th>Evento</th>
+
+                <th>Subcategoría</th>
+
+                <th>Nivel Mínimo</th>
+
+                <th>Nivel Máximo</th>
+
+                <th>Acciones</th>
 
             </tr>
-        @endforelse
 
-    </tbody>
+        </thead>
 
-</table>
+        <tbody>
+
+            @forelse($targets as $target)
+                <tr>
+
+                    <td>{{ $target->id }}</td>
+
+                    <td>
+                        {{ $target->event->nombre ?? 'Sin evento' }}
+                    </td>
+
+                    <td>
+                        {{ $target->subcategory->nombre ?? 'Sin subcategoría' }}
+                    </td>
+
+                    <td>{{ $target->nivel_min }}</td>
+
+                    <td>{{ $target->nivel_max }}</td>
+
+                    <td>
+
+                        <a href="{{ route('event-targets.edit', $target->id) }}">
+                            Editar
+                        </a>
+
+                        <form action="{{ route('event-targets.destroy', $target->id) }}" method="POST"
+                            style="display:inline;">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit">
+                                Eliminar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+            @empty
+
+                <tr>
+
+                    <td colspan="6">
+                        No existen objetivos registrados.
+                    </td>
+
+                </tr>
+            @endforelse
+
+        </tbody>
+
+    </table>
+@endsection

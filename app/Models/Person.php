@@ -33,4 +33,9 @@ class Person extends Model
     {
         return $this->hasMany(PersonCondition::class);
     }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }

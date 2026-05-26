@@ -1,83 +1,87 @@
-<h1>Nuevo Objetivo de Evento</h1>
+@extends('layouts.app')
+@section('content')
 
-@if ($errors->any())
-    <div>
-        <ul>
+    <h1>Nuevo Objetivo de Evento</h1>
 
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+    @if ($errors->any())
+        <div>
+            <ul>
 
-        </ul>
-    </div>
-@endif
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
 
-<form action="{{ route('event-targets.store') }}" method="POST">
+            </ul>
+        </div>
+    @endif
 
-    @csrf
+    <form action="{{ route('event-targets.store') }}" method="POST">
 
-    <div>
+        @csrf
 
-        <label>Evento</label>
+        <div>
 
-        <select name="event_id" required>
+            <label>Evento</label>
 
-            <option value="">
-                Seleccione
-            </option>
+            <select name="event_id" required>
 
-            @foreach ($events as $event)
-                <option value="{{ $event->id }}">
-
-                    {{ $event->nombre }}
-
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($events as $event)
+                    <option value="{{ $event->id }}">
 
-    </div>
+                        {{ $event->nombre }}
 
-    <div>
+                    </option>
+                @endforeach
 
-        <label>Subcategoría</label>
+            </select>
 
-        <select name="subcategory_id" required>
+        </div>
 
-            <option value="">
-                Seleccione
-            </option>
+        <div>
 
-            @foreach ($subcategories as $subcategory)
-                <option value="{{ $subcategory->id }}">
+            <label>Subcategoría</label>
 
-                    {{ $subcategory->nombre }}
+            <select name="subcategory_id" required>
 
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}">
 
-    </div>
+                        {{ $subcategory->nombre }}
 
-    <div>
+                    </option>
+                @endforeach
 
-        <label>Nivel mínimo</label>
+            </select>
 
-        <input type="number" name="nivel_min" min="1" max="5" required>
+        </div>
 
-    </div>
+        <div>
 
-    <div>
+            <label>Nivel mínimo</label>
 
-        <label>Nivel máximo</label>
+            <input type="number" name="nivel_min" min="1" max="5" required>
 
-        <input type="number" name="nivel_max" min="1" max="5" required>
+        </div>
 
-    </div>
+        <div>
 
-    <button type="submit">
-        Guardar
-    </button>
+            <label>Nivel máximo</label>
 
-</form>
+            <input type="number" name="nivel_max" min="1" max="5" required>
+
+        </div>
+
+        <button type="submit">
+            Guardar
+        </button>
+
+    </form>
+@endsection

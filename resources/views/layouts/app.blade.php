@@ -1,36 +1,114 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="es">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="UTF-8">
+    <title>Core Intervención Social</title>
+</head>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<body>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <div
+        style="
+            width: 250px;
+            float: left;
+            min-height: 100vh;
+            background: #f0f0f0;
+            padding: 20px;
+        ">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+        <h2>MENÚ</h2>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+        <ul>
+
+            <li>
+                <a href="{{ route('categories.index') }}">
+                    Categorías
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('subcategories.index') }}">
+                    Subcategorías
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('persons.index') }}">
+                    Personas
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('evaluators.index') }}">
+                    Evaluadores
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('person-conditions.index') }}">
+                    Condiciones Sociales
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('condition-followups.index') }}">
+                    Seguimientos
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('events.index') }}">
+                    Eventos
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('event-targets.index') }}">
+                    Targets
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('enrollments.index') }}">
+                    Inscripciones
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('attendances.index') }}">
+                    Asistencias
+                </a>
+            </li>
+
+        </ul>
+
+        <hr>
+
+        <p>
+            Usuario:
+            {{ auth()->user()->name }}
+        </p>
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+
+            <button type="submit">
+                Cerrar sesión
+            </button>
+        </form>
+
+    </div>
+
+    <div style="
+            margin-left: 270px;
+            padding: 20px;
+        ">
+
+        @yield('content')
+
+    </div>
+
+</body>
+
 </html>

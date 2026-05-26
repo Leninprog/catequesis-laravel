@@ -1,34 +1,36 @@
-<h1>Nueva Subcategoría</h1>
+@extends('layouts.app')
 
-<form action="{{ route('subcategories.store') }}" method="POST">
-    @csrf
+@section('content')
+    <h1>Nueva Subcategoría</h1>
 
-    <!-- RELACIÓN CONTROLADA -->
-    <label>Categoría</label>
+    <form action="{{ route('subcategories.store') }}" method="POST">
+        @csrf
 
-    <select name="category_id" required>
+        <!-- RELACIÓN CONTROLADA -->
+        <label>Categoría</label>
 
-        <option value="">
-            Seleccione una categoría
-        </option>
+        <select name="category_id" required>
 
-        @foreach($categories as $category)
-
-            <option value="{{ $category->id }}">
-                {{ $category->nombre }}
+            <option value="">
+                Seleccione una categoría
             </option>
 
-        @endforeach
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">
+                    {{ $category->nombre }}
+                </option>
+            @endforeach
 
-    </select>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="nombre" placeholder="Nombre">
 
-    <input type="text" name="descripcion" placeholder="Descripción">
+        <input type="text" name="descripcion" placeholder="Descripción">
 
-    <button type="submit">
-        Guardar
-    </button>
-</form>
+        <button type="submit">
+            Guardar
+        </button>
+    </form>
+@endsection

@@ -1,48 +1,82 @@
-<h1>Evaluadores</h1>
+@extends('layouts.app')
 
-<a href="{{ route('evaluators.create') }}">
-    Nuevo evaluador
-</a>
+@section('content')
+    <h1>Evaluadores</h1>
 
-@if (session('success'))
-    <p>{{ session('success') }}</p>
-@endif
+    <a href="{{ route('evaluators.create') }}">
+        Nuevo evaluador
+    </a>
 
-<table border="1" cellpadding="10">
+    @if (session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
 
-    <tr>
-        <th>Nombres</th>
-        <th>Especialidad</th>
-        <th>Email</th>
-        <th>Usuario</th>
-        <th>Estado</th>
-    </tr>
+    <table border="1" cellpadding="10">
 
-    @foreach ($evaluators as $evaluator)
         <tr>
 
-            <td>
-                {{ $evaluator->nombres }}
-                {{ $evaluator->apellidos }}
-            </td>
+            <th>Nombres</th>
 
-            <td>
-                {{ $evaluator->especialidad }}
-            </td>
+            <th>Especialidad</th>
 
-            <td>
-                {{ $evaluator->email }}
-            </td>
+            <th>Email</th>
 
-            <td>
-                {{ $evaluator->user?->username }}
-            </td>
+            <th>Usuario</th>
 
-            <td>
-                {{ $evaluator->estado }}
-            </td>
+            <th>Estado</th>
+
+            <th>Acciones</th>
 
         </tr>
-    @endforeach
 
-</table>
+        @foreach ($evaluators as $evaluator)
+            <tr>
+
+                <td>
+
+                    {{ $evaluator->nombres }}
+                    {{ $evaluator->apellidos }}
+
+                </td>
+
+                <td>
+                    {{ $evaluator->especialidad }}
+                </td>
+
+                <td>
+                    {{ $evaluator->email }}
+                </td>
+
+                <td>
+                    {{ $evaluator->user?->name }}
+                </td>
+
+                <td>
+                    {{ $evaluator->estado }}
+                </td>
+
+                <td>
+
+                    <a href="{{ route('evaluators.edit', $evaluator->id) }}">
+                        Editar
+                    </a>
+
+                    <form action="{{ route('evaluators.destroy', $evaluator->id) }}" method="POST" style="display:inline;">
+
+                        @csrf
+
+                        @method('DELETE')
+
+                        <button type="submit">
+                            Eliminar
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+        @endforeach
+
+    </table>
+@endsection

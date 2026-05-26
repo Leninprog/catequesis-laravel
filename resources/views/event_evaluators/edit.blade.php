@@ -1,97 +1,99 @@
-<h1>Editar Asignación</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
+@section('content')
+    <h1>Editar Asignación</h1>
 
-    <div>
+    @if ($errors->any())
+        <div>
 
-        <ul>
+            <ul>
 
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
 
-        </ul>
+            </ul>
 
-    </div>
+        </div>
+    @endif
 
-@endif
+    <form action="{{ route('event-evaluators.update', $eventEvaluator->id) }}" method="POST">
 
-<form action="{{ route('event-evaluators.update', $eventEvaluator->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-    @csrf
-    @method('PUT')
+        <div>
 
-    <div>
+            <label>Evento</label>
 
-        <label>Evento</label>
+            <select name="event_id" required>
 
-        <select name="event_id" required>
-
-            <option value="">
-                Seleccione
-            </option>
-
-            @foreach ($events as $event)
-                <option value="{{ $event->id }}"
-                    {{ old('event_id', $eventEvaluator->event_id) == $event->id ? 'selected' : '' }}>
-                    {{ $event->nombre }}
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($events as $event)
+                    <option value="{{ $event->id }}"
+                        {{ old('event_id', $eventEvaluator->event_id) == $event->id ? 'selected' : '' }}>
+                        {{ $event->nombre }}
+                    </option>
+                @endforeach
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>Evaluador</label>
+        <div>
 
-        <select name="evaluator_id" required>
+            <label>Evaluador</label>
 
-            <option value="">
-                Seleccione
-            </option>
+            <select name="evaluator_id" required>
 
-            @foreach ($evaluators as $evaluator)
-                <option value="{{ $evaluator->id }}"
-                    {{ old('evaluator_id', $eventEvaluator->evaluator_id) == $evaluator->id ? 'selected' : '' }}>
-                    {{ $evaluator->nombres }}
-                    {{ $evaluator->apellidos }}
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($evaluators as $evaluator)
+                    <option value="{{ $evaluator->id }}"
+                        {{ old('evaluator_id', $eventEvaluator->evaluator_id) == $evaluator->id ? 'selected' : '' }}>
+                        {{ $evaluator->nombres }}
+                        {{ $evaluator->apellidos }}
+                    </option>
+                @endforeach
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>Rol</label>
+        <div>
 
-        <input type="text" name="rol" value="{{ old('rol', $eventEvaluator->rol) }}">
+            <label>Rol</label>
 
-    </div>
+            <input type="text" name="rol" value="{{ old('rol', $eventEvaluator->rol) }}">
 
-    <div>
+        </div>
 
-        <label>Estado</label>
+        <div>
 
-        <select name="estado" required>
+            <label>Estado</label>
 
-            <option value="activo" {{ old('estado', $eventEvaluator->estado) == 'activo' ? 'selected' : '' }}>
-                Activo
-            </option>
+            <select name="estado" required>
 
-            <option value="inactivo" {{ old('estado', $eventEvaluator->estado) == 'inactivo' ? 'selected' : '' }}>
-                Inactivo
-            </option>
+                <option value="activo" {{ old('estado', $eventEvaluator->estado) == 'activo' ? 'selected' : '' }}>
+                    Activo
+                </option>
 
-        </select>
+                <option value="inactivo" {{ old('estado', $eventEvaluator->estado) == 'inactivo' ? 'selected' : '' }}>
+                    Inactivo
+                </option>
 
-    </div>
+            </select>
 
-    <button type="submit">
-        Actualizar
-    </button>
+        </div>
 
-</form>
+        <button type="submit">
+            Actualizar
+        </button>
+
+    </form>
+@endsection

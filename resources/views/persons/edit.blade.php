@@ -1,42 +1,45 @@
-<h1>Editar Persona</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
+@section('content')
+    <h1>Editar Persona</h1>
 
-    <div style="color:red; border:1px solid red; padding:10px; margin-bottom:20px;">
+    @if ($errors->any())
+        <div style="color:red; border:1px solid red; padding:10px; margin-bottom:20px;">
 
-        <strong>
-            Se encontraron errores:
-        </strong>
+            <strong>
+                Se encontraron errores:
+            </strong>
 
-        <ul>
+            <ul>
 
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
 
-        </ul>
+            </ul>
 
-    </div>
+        </div>
+    @endif
 
-@endif
+    <form action="{{ route('persons.update', $person) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-<form action="{{ route('persons.update', $person) }}" method="POST">
-    @csrf
-    @method('PUT')
+        <input type="text" name="nombres" value="{{ $person->nombres }}">
+        <input type="text" name="apellidos" value="{{ $person->apellidos }}">
+        <input type="text" name="documento" value="{{ $person->documento }}">
+        <input type="text" name="telefono" value="{{ $person->telefono }}">
+        <input type="email" name="email" value="{{ $person->email }}">
+        <input type="text" name="direccion" value="{{ $person->direccion }}">
 
-    <input type="text" name="nombres" value="{{ $person->nombres }}">
-    <input type="text" name="apellidos" value="{{ $person->apellidos }}">
-    <input type="text" name="documento" value="{{ $person->documento }}">
-    <input type="text" name="telefono" value="{{ $person->telefono }}">
-    <input type="email" name="email" value="{{ $person->email }}">
-    <input type="text" name="direccion" value="{{ $person->direccion }}">
+        <select name="estado">
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+        </select>
 
-    <select name="estado">
-        <option value="activo">Activo</option>
-        <option value="inactivo">Inactivo</option>
-    </select>
+        <button type="submit">
+            Actualizar
+        </button>
+    </form>
 
-    <button type="submit">
-        Actualizar
-    </button>
-</form>
+@endsection

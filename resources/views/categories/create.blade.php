@@ -1,13 +1,17 @@
-<h1>Nueva Categoría</h1>
+@extends('layouts.app')
 
-<form action="{{ route('categories.store') }}" method="POST">
-    @csrf
+@section('content')
+    <h1>Nueva Categoría</h1>
 
-    <input type="text" name="nombre" placeholder="Nombre">
+    <form action="{{ route('categories.store') }}" method="POST">
+        @csrf
 
-    <input type="text" name="descripcion" placeholder="Descripción">
+        <input type="text" name="nombre" placeholder="Nombre">
 
-    <button type="submit">
-        Guardar
-    </button>
-</form>
+        <input type="text" name="descripcion" placeholder="Descripción">
+
+        <button type="submit">
+            Guardar
+        </button>
+    </form>
+@endsection

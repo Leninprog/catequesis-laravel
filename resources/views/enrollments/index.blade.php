@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Evaluadores por Evento</h1>
+    <h1>Inscripciones</h1>
 
     @if (session('success'))
         <div>
@@ -8,86 +8,69 @@
         </div>
     @endif
 
-    <a href="{{ route('event-evaluators.create') }}">
-        Nueva Asignación
-    </a>
-
     <table border="1" cellpadding="10">
 
         <thead>
-
             <tr>
-
                 <th>ID</th>
-
+                <th>Persona</th>
                 <th>Evento</th>
-
-                <th>Evaluador</th>
-
-                <th>Rol</th>
-
+                <th>Fecha</th>
                 <th>Estado</th>
-
-                <th>Acciones</th>
-
             </tr>
-
         </thead>
 
         <tbody>
 
-            @forelse($eventEvaluators as $eventEvaluator)
+            @forelse($enrollments as $enrollment)
                 <tr>
 
-                    <td>{{ $eventEvaluator->id }}</td>
-
                     <td>
-                        {{ $eventEvaluator->event->nombre ?? 'Sin evento' }}
+                        {{ $enrollment->id }}
                     </td>
 
                     <td>
-                        {{ $eventEvaluator->evaluator->nombres ?? '' }}
-                        {{ $eventEvaluator->evaluator->apellidos ?? '' }}
+                        {{ $enrollment->person->nombres }}
+                        {{ $enrollment->person->apellidos }}
                     </td>
 
                     <td>
-                        {{ $eventEvaluator->rol }}
+                        {{ $enrollment->event->nombre }}
                     </td>
 
                     <td>
-                        {{ $eventEvaluator->estado }}
+                        {{ $enrollment->fecha_inscripcion }}
                     </td>
 
                     <td>
+                        {{ $enrollment->estado }}
+                    </td>
 
-                        <a href="{{ route('event-evaluators.edit', $eventEvaluator->id) }}">
+                    {{-- <td>
+
+                        <a href="{{ route('enrollments.edit', $enrollment) }}">
                             Editar
                         </a>
 
-                        <form action="{{ route('event-evaluators.destroy', $eventEvaluator->id) }}" method="POST"
-                            style="display:inline;">
-
+                        <form action="{{ route('enrollments.destroy', $enrollment) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
 
                             <button type="submit">
                                 Eliminar
                             </button>
-
                         </form>
 
-                    </td>
+                    </td> --}}
 
                 </tr>
 
             @empty
 
                 <tr>
-
                     <td colspan="6">
-                        No existen asignaciones registradas.
+                        No hay inscripciones registradas.
                     </td>
-
                 </tr>
             @endforelse
 

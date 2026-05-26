@@ -4,20 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Attendance;
 
-class EventEvaluator extends Model
+class Enrollment extends Model
 {
     use HasFactory;
 
-    protected $table = 'event_evaluators';
+    protected $table = 'enrollments';
 
     public $timestamps = false;
 
     protected $fillable = [
+        'person_id',
         'event_id',
-        'evaluator_id',
-        'rol',
-        'activo'
+        'fecha_inscripcion',
+        'estado',
+        'observaciones',
+        'created_by'
     ];
 
     /*
@@ -26,13 +29,23 @@ class EventEvaluator extends Model
     |----------------------------------------------------------------------
     */
 
+    public function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
+
     public function event()
     {
         return $this->belongsTo(Event::class);
     }
 
-    public function evaluator()
+    public function creator()
     {
-        return $this->belongsTo(Evaluator::class);
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }

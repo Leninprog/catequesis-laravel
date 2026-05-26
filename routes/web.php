@@ -11,6 +11,8 @@ use App\Http\Controllers\ConditionFollowupController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventTargetController;
 use App\Http\Controllers\EventEvaluatorController;
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\AttendanceController;
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('persons', PersonController::class);
@@ -46,6 +48,14 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('event-evaluators', EventEvaluatorController::class);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('enrollments', EnrollmentController::class)->only(['index', 'destroy']);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('attendances', AttendanceController::class);
 });
 /*
 | Web Routes

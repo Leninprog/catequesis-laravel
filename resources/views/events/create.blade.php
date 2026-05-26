@@ -1,82 +1,87 @@
-<h1>Nuevo Evento</h1>
+@extends('layouts.app')
+@section('content')
 
-@if ($errors->any())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    <h1>Nuevo Evento</h1>
 
-<form action="{{ route('events.store') }}" method="POST">
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    @csrf
+    <form action="{{ route('events.store') }}" method="POST">
 
-    <div>
-        <label>Nombre</label>
+        @csrf
 
-        <input type="text" name="nombre" required>
-    </div>
+        <div>
+            <label>Nombre</label>
 
-    <div>
-        <label>Descripción</label>
+            <input type="text" name="nombre" required>
+        </div>
 
-        <textarea name="descripcion"></textarea>
-    </div>
+        <div>
+            <label>Descripción</label>
 
-    <div>
-        <label>Tipo</label>
+            <textarea name="descripcion"></textarea>
+        </div>
 
-        <select name="tipo" required>
-            <option value="taller">Taller</option>
-            <option value="charla">Charla</option>
-            <option value="brigada">Brigada</option>
-            <option value="seguimiento">Seguimiento</option>
-        </select>
-    </div>
+        <div>
+            <label>Tipo</label>
 
-    <div>
-        <label>Modalidad</label>
+            <select name="tipo" required>
+                <option value="taller">Taller</option>
+                <option value="charla">Charla</option>
+                <option value="brigada">Brigada</option>
+                <option value="seguimiento">Seguimiento</option>
+            </select>
+        </div>
 
-        <select name="modalidad" required>
-            <option value="presencial">Presencial</option>
-            <option value="virtual">Virtual</option>
-            <option value="hibrido">Híbrido</option>
-        </select>
-    </div>
+        <div>
+            <label>Modalidad</label>
 
-    <div>
-        <label>Cupo máximo</label>
+            <select name="modalidad" required>
+                <option value="presencial">Presencial</option>
+                <option value="virtual">Virtual</option>
+                <option value="hibrido">Híbrido</option>
+            </select>
+        </div>
 
-        <input type="number" name="cupo_maximo">
-    </div>
+        <div>
+            <label>Cupo máximo</label>
 
-    <div>
-        <label>Fecha inicio</label>
+            <input type="number" name="cupo_maximo">
+        </div>
 
-        <input type="date" name="fecha_inicio" required>
-    </div>
+        <div>
+            <label>Fecha inicio</label>
 
-    <div>
-        <label>Fecha fin</label>
+            <input type="date" name="fecha_inicio" required>
+        </div>
 
-        <input type="date" name="fecha_fin" required>
-    </div>
+        <div>
+            <label>Fecha fin</label>
 
-    <div>
-        <label>Estado</label>
+            <input type="date" name="fecha_fin" required>
+        </div>
 
-        <select name="estado" required>
-            <option value="activo">Activo</option>
-            <option value="inactivo">Inactivo</option>
-            <option value="finalizado">Finalizado</option>
-        </select>
-    </div>
+        <div>
+            <label>Estado</label>
 
-    <button type="submit">
-        Guardar
-    </button>
+            <select name="estado" required>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+                <option value="finalizado">Finalizado</option>
+            </select>
+        </div>
 
-</form>
+        <button type="submit">
+            Guardar
+        </button>
+
+    </form>
+
+@endsection

@@ -1,70 +1,72 @@
-<h1>Nuevo Seguimiento</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
+@section('content')
+    <h1>Nuevo Seguimiento</h1>
 
-    <div>
-        <ul>
+    @if ($errors->any())
+        <div>
+            <ul>
 
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
 
-        </ul>
-    </div>
+            </ul>
+        </div>
+    @endif
 
-@endif
+    <form action="{{ route('condition-followups.store') }}" method="POST">
+        @csrf
 
-<form action="{{ route('condition-followups.store') }}" method="POST">
-    @csrf
+        <div>
 
-    <div>
+            <label>Condición</label>
 
-        <label>Condición</label>
+            <select name="condition_id" required>
 
-        <select name="condition_id" required>
-
-            <option value="">
-                Seleccione
-            </option>
-
-            @foreach ($conditions as $condition)
-                <option value="{{ $condition->id }}">
-
-                    {{ $condition->person->nombres }}
-
-                    {{ $condition->person->apellidos }}
-
-                    -
-
-                    {{ $condition->subcategory->nombre }}
-
+                <option value="">
+                    Seleccione
                 </option>
-            @endforeach
 
-        </select>
+                @foreach ($conditions as $condition)
+                    <option value="{{ $condition->id }}">
 
-    </div>
+                        {{ $condition->person->nombres }}
 
-    <div>
+                        {{ $condition->person->apellidos }}
 
-        <label>Nuevo Nivel</label>
+                        -
 
-        <input type="number" name="nivel_nuevo" min="1" max="5" required>
+                        {{ $condition->subcategory->nombre }}
 
-    </div>
+                    </option>
+                @endforeach
 
-    <div>
+            </select>
 
-        <label>Observaciones</label>
+        </div>
 
-        <textarea name="observaciones"></textarea>
+        <div>
 
-    </div>
+            <label>Nuevo Nivel</label>
 
-    <button type="submit">
+            <input type="number" name="nivel_nuevo" min="1" max="5" required>
 
-        Guardar
+        </div>
 
-    </button>
+        <div>
 
-</form>
+            <label>Observaciones</label>
+
+            <textarea name="observaciones"></textarea>
+
+        </div>
+
+        <button type="submit">
+
+            Guardar
+
+        </button>
+
+    </form>
+@endsection

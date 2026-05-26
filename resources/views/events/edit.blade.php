@@ -1,134 +1,139 @@
-<h1>Editar Evento</h1>
+@extends('layouts.app')
+@section('content')
 
-@if ($errors->any())
-    <div>
-        <ul>
+    <h1>Editar Evento</h1>
 
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+    @if ($errors->any())
+        <div>
+            <ul>
 
-        </ul>
-    </div>
-@endif
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
 
-<form action="{{ route('events.update', $event->id) }}" method="POST">
+            </ul>
+        </div>
+    @endif
 
-    @csrf
-    @method('PUT')
+    <form action="{{ route('events.update', $event->id) }}" method="POST">
 
-    <div>
+        @csrf
+        @method('PUT')
 
-        <label>Nombre</label>
+        <div>
 
-        <input type="text" name="nombre" value="{{ old('nombre', $event->nombre) }}" required>
+            <label>Nombre</label>
 
-    </div>
+            <input type="text" name="nombre" value="{{ old('nombre', $event->nombre) }}" required>
 
-    <div>
+        </div>
 
-        <label>Descripción</label>
+        <div>
 
-        <textarea name="descripcion">{{ old('descripcion', $event->descripcion) }}</textarea>
+            <label>Descripción</label>
 
-    </div>
+            <textarea name="descripcion">{{ old('descripcion', $event->descripcion) }}</textarea>
 
-    <div>
+        </div>
 
-        <label>Tipo</label>
+        <div>
 
-        <select name="tipo" required>
+            <label>Tipo</label>
 
-            <option value="taller" {{ old('tipo', $event->tipo) == 'taller' ? 'selected' : '' }}>
-                Taller
-            </option>
+            <select name="tipo" required>
 
-            <option value="charla" {{ old('tipo', $event->tipo) == 'charla' ? 'selected' : '' }}>
-                Charla
-            </option>
+                <option value="taller" {{ old('tipo', $event->tipo) == 'taller' ? 'selected' : '' }}>
+                    Taller
+                </option>
 
-            <option value="brigada" {{ old('tipo', $event->tipo) == 'brigada' ? 'selected' : '' }}>
-                Brigada
-            </option>
+                <option value="charla" {{ old('tipo', $event->tipo) == 'charla' ? 'selected' : '' }}>
+                    Charla
+                </option>
 
-            <option value="seguimiento" {{ old('tipo', $event->tipo) == 'seguimiento' ? 'selected' : '' }}>
-                Seguimiento
-            </option>
+                <option value="brigada" {{ old('tipo', $event->tipo) == 'brigada' ? 'selected' : '' }}>
+                    Brigada
+                </option>
 
-        </select>
+                <option value="seguimiento" {{ old('tipo', $event->tipo) == 'seguimiento' ? 'selected' : '' }}>
+                    Seguimiento
+                </option>
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>Modalidad</label>
+        <div>
 
-        <select name="modalidad" required>
+            <label>Modalidad</label>
 
-            <option value="presencial" {{ old('modalidad', $event->modalidad) == 'presencial' ? 'selected' : '' }}>
-                Presencial
-            </option>
+            <select name="modalidad" required>
 
-            <option value="virtual" {{ old('modalidad', $event->modalidad) == 'virtual' ? 'selected' : '' }}>
-                Virtual
-            </option>
+                <option value="presencial" {{ old('modalidad', $event->modalidad) == 'presencial' ? 'selected' : '' }}>
+                    Presencial
+                </option>
 
-            <option value="hibrido" {{ old('modalidad', $event->modalidad) == 'hibrido' ? 'selected' : '' }}>
-                Híbrido
-            </option>
+                <option value="virtual" {{ old('modalidad', $event->modalidad) == 'virtual' ? 'selected' : '' }}>
+                    Virtual
+                </option>
 
-        </select>
+                <option value="hibrido" {{ old('modalidad', $event->modalidad) == 'hibrido' ? 'selected' : '' }}>
+                    Híbrido
+                </option>
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>Cupo máximo</label>
+        <div>
 
-        <input type="number" name="cupo_maximo" value="{{ old('cupo_maximo', $event->cupo_maximo) }}">
+            <label>Cupo máximo</label>
 
-    </div>
+            <input type="number" name="cupo_maximo" value="{{ old('cupo_maximo', $event->cupo_maximo) }}">
 
-    <div>
+        </div>
 
-        <label>Fecha inicio</label>
+        <div>
 
-        <input type="date" name="fecha_inicio" value="{{ old('fecha_inicio', $event->fecha_inicio) }}" required>
+            <label>Fecha inicio</label>
 
-    </div>
+            <input type="date" name="fecha_inicio" value="{{ old('fecha_inicio', $event->fecha_inicio) }}" required>
 
-    <div>
+        </div>
 
-        <label>Fecha fin</label>
+        <div>
 
-        <input type="date" name="fecha_fin" value="{{ old('fecha_fin', $event->fecha_fin) }}" required>
+            <label>Fecha fin</label>
 
-    </div>
+            <input type="date" name="fecha_fin" value="{{ old('fecha_fin', $event->fecha_fin) }}" required>
 
-    <div>
+        </div>
 
-        <label>Estado</label>
+        <div>
 
-        <select name="estado" required>
+            <label>Estado</label>
 
-            <option value="activo" {{ old('estado', $event->estado) == 'activo' ? 'selected' : '' }}>
-                Activo
-            </option>
+            <select name="estado" required>
 
-            <option value="inactivo" {{ old('estado', $event->estado) == 'inactivo' ? 'selected' : '' }}>
-                Inactivo
-            </option>
+                <option value="activo" {{ old('estado', $event->estado) == 'activo' ? 'selected' : '' }}>
+                    Activo
+                </option>
 
-            <option value="finalizado" {{ old('estado', $event->estado) == 'finalizado' ? 'selected' : '' }}>
-                Finalizado
-            </option>
+                <option value="inactivo" {{ old('estado', $event->estado) == 'inactivo' ? 'selected' : '' }}>
+                    Inactivo
+                </option>
 
-        </select>
+                <option value="finalizado" {{ old('estado', $event->estado) == 'finalizado' ? 'selected' : '' }}>
+                    Finalizado
+                </option>
 
-    </div>
+            </select>
 
-    <button type="submit">
-        Actualizar
-    </button>
+        </div>
 
-</form>
+        <button type="submit">
+            Actualizar
+        </button>
+
+    </form>
+
+@endsection

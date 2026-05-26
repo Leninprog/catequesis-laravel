@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventTarget;
 use App\Models\EventEvaluator;
+use App\Models\Enrollment;
 
 class Event extends Model
 {
@@ -48,6 +49,11 @@ class Event extends Model
     public function evaluators()
     {
         return $this->hasMany(EventEvaluator::class, 'event_id');
+    }
+
+    public function eventEvaluators()
+    {
+        return $this->hasMany(EventEvaluator::class);
     }
 
     public function enrollments()

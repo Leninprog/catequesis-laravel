@@ -10,39 +10,123 @@ class EvaluatorController extends Controller
 {
     public function index()
     {
-        $evaluators = Evaluator::with('user')->get();
+        $evaluators = Evaluator::with(
+            'user'
+        )->get();
 
-        return view('evaluators.index', compact('evaluators'));
+        return view(
+            'evaluators.index',
+            compact('evaluators')
+        );
     }
 
     public function create()
     {
-        $users = User::orderBy('name')->get();
+        $users = User::orderBy(
+            'name'
+        )->get();
 
-        return view('evaluators.create', compact('users'));
+        return view(
+            'evaluators.create',
+            compact('users')
+        );
     }
 
     public function store(StoreEvaluatorRequest $request)
     {
         Evaluator::create([
 
-            'nombres' => $request->nombres,
+            'nombres' =>
+            $request->nombres,
 
-            'apellidos' => $request->apellidos,
+            'apellidos' =>
+            $request->apellidos,
 
-            'especialidad' => $request->especialidad,
+            'especialidad' =>
+            $request->especialidad,
 
-            'telefono' => $request->telefono,
+            'telefono' =>
+            $request->telefono,
 
-            'email' => $request->email,
+            'email' =>
+            $request->email,
 
-            'estado' => $request->estado,
+            'estado' =>
+            $request->estado,
 
-            'user_id' => $request->user_id
+            'user_id' =>
+            $request->user_id
         ]);
 
         return redirect()
             ->route('evaluators.index')
-            ->with('success', 'Evaluador creado correctamente.');
+            ->with(
+                'success',
+                'Evaluador creado correctamente.'
+            );
+    }
+
+    public function edit(Evaluator $evaluator)
+    {
+        $users = User::orderBy(
+            'name'
+        )->get();
+
+        return view(
+            'evaluators.edit',
+            compact(
+                'evaluator',
+                'users'
+            )
+        );
+    }
+
+    public function update(
+        StoreEvaluatorRequest $request,
+        Evaluator $evaluator
+    ) {
+
+        $evaluator->update([
+
+            'nombres' =>
+            $request->nombres,
+
+            'apellidos' =>
+            $request->apellidos,
+
+            'especialidad' =>
+            $request->especialidad,
+
+            'telefono' =>
+            $request->telefono,
+
+            'email' =>
+            $request->email,
+
+            'estado' =>
+            $request->estado,
+
+            'user_id' =>
+            $request->user_id
+        ]);
+
+        return redirect()
+            ->route('evaluators.index')
+            ->with(
+                'success',
+                'Evaluador actualizado correctamente.'
+            );
+    }
+
+    public function destroy(Evaluator $evaluator)
+    {
+        $evaluator->delete();
+
+        return redirect()
+            ->route('evaluators.index')
+            ->with(
+                'success',
+                'Evaluador eliminado correctamente.'
+            );
     }
 }
