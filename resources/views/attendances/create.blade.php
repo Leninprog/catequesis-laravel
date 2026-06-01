@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <h1>Nueva Asistencia</h1>
+    <h1 class="text-3xl font-bold mb-6">Nueva Asistencia</h1>
 
     @if ($errors->any())
         <ul>
@@ -16,9 +16,9 @@
     <form action="{{ route('attendances.store') }}" method="POST">
         @csrf
 
-        <div>
+        <div class="mb-4">
 
-            <label>Inscripción</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Inscripción</label>
 
             <select name="enrollment_id" required>
 
@@ -43,9 +43,9 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Estado</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
             <select name="estado" required>
 
@@ -61,15 +61,15 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Observaciones</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Observaciones</label>
 
-            <textarea name="observaciones"></textarea>
+            <textarea name="observaciones" class="border border-gray-300 rounded px-4 py-2"></textarea>
 
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Guardar
         </button>
 

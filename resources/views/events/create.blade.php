@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-    <h1>Nuevo Evento</h1>
+    <h1 class="text-3xl font-bold mb-6">Nuevo Evento</h1>
 
     @if ($errors->any())
-        <div>
+        <div class="mb-4 text-red-600">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -13,24 +13,24 @@
         </div>
     @endif
 
-    <form action="{{ route('events.store') }}" method="POST">
+    <form class="space-y-4" action="{{ route('events.store') }}" method="POST">
 
         @csrf
 
-        <div>
-            <label>Nombre</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
 
-            <input type="text" name="nombre" required>
+            <input type="text" name="nombre" required class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Descripción</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
 
-            <textarea name="descripcion"></textarea>
+            <textarea name="descripcion" class="border border-gray-300 rounded px-4 py-2"></textarea>
         </div>
 
-        <div>
-            <label>Tipo</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
 
             <select name="tipo" required>
                 <option value="taller">Taller</option>
@@ -40,8 +40,8 @@
             </select>
         </div>
 
-        <div>
-            <label>Modalidad</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Modalidad</label>
 
             <select name="modalidad" required>
                 <option value="presencial">Presencial</option>
@@ -50,26 +50,26 @@
             </select>
         </div>
 
-        <div>
-            <label>Cupo máximo</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Cupo máximo</label>
 
-            <input type="number" name="cupo_maximo">
+            <input type="number" name="cupo_maximo" class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Fecha inicio</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha inicio</label>
 
             <input type="date" name="fecha_inicio" required>
         </div>
 
-        <div>
-            <label>Fecha fin</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha fin</label>
 
             <input type="date" name="fecha_fin" required>
         </div>
 
-        <div>
-            <label>Estado</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
             <select name="estado" required>
                 <option value="activo">Activo</option>
@@ -78,7 +78,7 @@
             </select>
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Guardar
         </button>
 

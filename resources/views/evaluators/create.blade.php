@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Nuevo Evaluador</h1>
+    <h1 class="text-3xl font-bold mb-6">Nuevo Evaluador</h1>
 
     @if ($errors->any())
-        <div>
+        <div class="mb-4 text-red-600">
             <ul>
 
                 @foreach ($errors->all() as $error)
@@ -15,44 +15,44 @@
         </div>
     @endif
 
-    <form action="{{ route('evaluators.store') }}" method="POST">
+    <form class="space-y-4" action="{{ route('evaluators.store') }}" method="POST">
 
         @csrf
 
-        <div>
-            <label>Nombres</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombres</label>
 
-            <input type="text" name="nombres" required>
+            <input type="text" name="nombres" required class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Apellidos</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Apellidos</label>
 
-            <input type="text" name="apellidos" required>
+            <input type="text" name="apellidos" required class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Especialidad</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
 
-            <input type="text" name="especialidad">
+            <input type="text" name="especialidad" class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Teléfono</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
 
-            <input type="text" name="telefono">
+            <input type="text" name="telefono" class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Email</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
 
-            <input type="email" name="email">
+            <input type="email" name="email" class="border border-gray-300 rounded px-4 py-2">
         </div>
 
-        <div>
-            <label>Usuario asociado</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Usuario asociado</label>
 
-            <select name="user_id">
+            <select name="user_id" class="border border-gray-300 rounded px-4 py-2">
 
                 <option value="">
                     Seleccione
@@ -67,10 +67,10 @@
             </select>
         </div>
 
-        <div>
-            <label>Estado</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
-            <select name="estado" required>
+            <select name="estado" required class="border border-gray-300 rounded px-4 py-2">
 
                 <option value="activo">
                     Activo
@@ -83,7 +83,7 @@
             </select>
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Guardar
         </button>
 

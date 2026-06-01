@@ -1,35 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Objetivos de Eventos</h1>
+    <h1 class="text-3xl font-bold mb-6">Objetivos de Eventos</h1>
 
     @if (session('success'))
-        <div>
+        <div class="mb-4 text-green-600">
             {{ session('success') }}
         </div>
     @endif
 
-    <a href="{{ route('event-targets.create') }}">
+    <a href="{{ route('event-targets.create') }}"
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
         Nuevo Objetivo
     </a>
 
-    <table border="1" cellpadding="10">
+    <table class="w-full border border-gray-200 rounded">
 
         <thead>
 
             <tr>
 
-                <th>ID</th>
+                <th class="border px-4 py-2">ID</th>
 
-                <th>Evento</th>
+                <th class="border px-4 py-2">Evento</th>
 
-                <th>Subcategoría</th>
+                <th class="border px-4 py-2">Subcategoría</th>
 
-                <th>Nivel Mínimo</th>
+                <th class="border px-4 py-2">Nivel Mínimo</th>
 
-                <th>Nivel Máximo</th>
+                <th class="border px-4 py-2">Nivel Máximo</th>
 
-                <th>Acciones</th>
+                <th class="border px-4 py-2">Acciones</th>
 
             </tr>
 
@@ -40,33 +41,34 @@
             @forelse($targets as $target)
                 <tr>
 
-                    <td>{{ $target->id }}</td>
+                    <td class="border px-4 py-2">{{ $target->id }}</td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $target->event->nombre ?? 'Sin evento' }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $target->subcategory->nombre ?? 'Sin subcategoría' }}
                     </td>
 
-                    <td>{{ $target->nivel_min }}</td>
+                    <td class="border px-4 py-2">{{ $target->nivel_min }}</td>
 
-                    <td>{{ $target->nivel_max }}</td>
+                    <td class="border px-4 py-2">{{ $target->nivel_max }}</td>
 
-                    <td>
+                    <td class="border px-4 py-2">
 
-                        <a href="{{ route('event-targets.edit', $target->id) }}">
+                        <a href="{{ route('event-targets.edit', $target->id) }}"
+                            class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
                             Editar
                         </a>
 
-                        <form action="{{ route('event-targets.destroy', $target->id) }}" method="POST"
+                        <form class="inline" action="{{ route('event-targets.destroy', $target->id) }}" method="POST"
                             style="display:inline;">
 
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit">
+                            <button type="submit" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
                                 Eliminar
                             </button>
 

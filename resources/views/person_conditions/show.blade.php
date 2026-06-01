@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Detalle de Condición</h1>
+    <h1 class="text-3xl font-bold mb-6">Detalle de Condición</h1>
 
     <p>
         Persona:
@@ -31,31 +31,31 @@
 
     <h2>Seguimientos</h2>
 
-    <table border="1">
+    <table class="w-full border border-gray-200 rounded">
 
         <tr>
-            <th>Fecha</th>
-            <th>Nivel anterior</th>
-            <th>Nivel nuevo</th>
-            <th>Observaciones</th>
+            <th class="border px-4 py-2">Fecha</th>
+            <th class="border px-4 py-2">Nivel anterior</th>
+            <th class="border px-4 py-2">Nivel nuevo</th>
+            <th class="border px-4 py-2">Observaciones</th>
         </tr>
 
         @foreach ($personCondition->followups as $followup)
             <tr>
 
-                <td>
+                <td class="border px-4 py-2">
                     {{ $followup->fecha }}
                 </td>
 
-                <td>
+                <td class="border px-4 py-2">
                     {{ $followup->nivel_anterior }}
                 </td>
 
-                <td>
+                <td class="border px-4 py-2">
                     {{ $followup->nivel_nuevo }}
                 </td>
 
-                <td>
+                <td class="border px-4 py-2">
                     {{ $followup->observaciones }}
                 </td>
 

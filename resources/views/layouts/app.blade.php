@@ -3,109 +3,142 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Core Intervención Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Core Intervención Social
+    </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="bg-gray-100">
 
-    <div
-        style="
-            width: 250px;
-            float: left;
-            min-height: 100vh;
-            background: #f0f0f0;
-            padding: 20px;
-        ">
+    <div class="flex min-h-screen">
 
-        <h2>MENÚ</h2>
+        <!-- SIDEBAR -->
 
-        <ul>
+        <aside class="w-64 bg-white shadow-lg">
 
-            <li>
-                <a href="{{ route('categories.index') }}">
-                    Categorías
-                </a>
-            </li>
+            <div class="p-6 border-b">
 
-            <li>
-                <a href="{{ route('subcategories.index') }}">
-                    Subcategorías
-                </a>
-            </li>
+                <h2 class="text-xl font-bold text-gray-800">
+                    Core Social
+                </h2>
 
-            <li>
-                <a href="{{ route('persons.index') }}">
-                    Personas
-                </a>
-            </li>
+            </div>
 
-            <li>
-                <a href="{{ route('evaluators.index') }}">
-                    Evaluadores
-                </a>
-            </li>
+            <nav class="p-4">
 
-            <li>
-                <a href="{{ route('person-conditions.index') }}">
-                    Condiciones Sociales
-                </a>
-            </li>
+                <ul class="space-y-2">
 
-            <li>
-                <a href="{{ route('condition-followups.index') }}">
-                    Seguimientos
-                </a>
-            </li>
+                    <li>
+                        <a href="{{ route('categories.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Categorías
+                        </a>
+                    </li>
 
-            <li>
-                <a href="{{ route('events.index') }}">
-                    Eventos
-                </a>
-            </li>
+                    <li>
+                        <a href="{{ route('subcategories.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Subcategorías
+                        </a>
+                    </li>
 
-            <li>
-                <a href="{{ route('event-targets.index') }}">
-                    Targets
-                </a>
-            </li>
+                    <li>
+                        <a href="{{ route('persons.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Personas
+                        </a>
+                    </li>
 
-            <li>
-                <a href="{{ route('enrollments.index') }}">
-                    Inscripciones
-                </a>
-            </li>
+                    <li>
+                        <a href="{{ route('evaluators.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Evaluadores
+                        </a>
+                    </li>
 
-            <li>
-                <a href="{{ route('attendances.index') }}">
-                    Asistencias
-                </a>
-            </li>
+                    <li>
+                        <a href="{{ route('person-conditions.index') }}"
+                            class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Condiciones Sociales
+                        </a>
+                    </li>
 
-        </ul>
+                    <li>
+                        <a href="{{ route('condition-followups.index') }}"
+                            class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Seguimientos
+                        </a>
+                    </li>
 
-        <hr>
+                    <li>
+                        <a href="{{ route('events.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Eventos
+                        </a>
+                    </li>
 
-        <p>
-            Usuario:
-            {{ auth()->user()->name }}
-        </p>
+                    <li>
+                        <a href="{{ route('event-targets.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Targets
+                        </a>
+                    </li>
 
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
+                    <li>
+                        <a href="{{ route('enrollments.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Inscripciones
+                        </a>
+                    </li>
 
-            <button type="submit">
-                Cerrar sesión
-            </button>
-        </form>
+                    <li>
+                        <a href="{{ route('attendances.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Asistencias
+                        </a>
+                    </li>
 
-    </div>
+                </ul>
 
-    <div style="
-            margin-left: 270px;
-            padding: 20px;
-        ">
+            </nav>
 
-        @yield('content')
+            <div class="border-t p-4 mt-4">
+
+                <p class="text-sm text-gray-600 mb-3">
+                    {{ auth()->user()->name }}
+                </p>
+
+                <form action="{{ route('logout') }}" method="POST">
+
+                    @csrf
+
+                    <button type="submit" class="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">
+
+                        Cerrar sesión
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO -->
+
+        <main class="flex-1 p-8">
+
+            @if (session('success'))
+                <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+
+                    {{ session('success') }}
+
+                </div>
+            @endif
+
+            <div class="bg-white shadow rounded-lg p-6">
+
+                @yield('content')
+
+            </div>
+
+        </main>
 
     </div>
 

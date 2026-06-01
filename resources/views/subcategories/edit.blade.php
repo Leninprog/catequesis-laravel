@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <h1>Editar Subcategoría</h1>
+    <h1 class="text-3xl font-bold mb-6">Editar Subcategoría</h1>
 
     @if ($errors->any())
-        <div>
+        <div class="mb-4" style="color: red;">
 
             <ul>
 
@@ -18,17 +18,17 @@
         </div>
     @endif
 
-    <form action="{{ route('subcategories.update', $subcategory->id) }}" method="POST">
+    <form class="space-y-4" action="{{ route('subcategories.update', $subcategory->id) }}" method="POST">
 
         @csrf
 
         @method('PUT')
 
-        <div>
+        <div class="mb-4">
 
-            <label>Categoría</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
 
-            <select name="category_id" required>
+            <select name="category_id" required class="border border-gray-300 rounded px-4 py-2">
 
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @selected(old('category_id', $subcategory->category_id) == $category->id)>
@@ -42,23 +42,23 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Nombre</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
 
-            <input type="text" name="nombre" value="{{ old('nombre', $subcategory->nombre) }}" required>
-
-        </div>
-
-        <div>
-
-            <label>Descripción</label>
-
-            <textarea name="descripcion">{{ old('descripcion', $subcategory->descripcion) }}</textarea>
+            <input type="text" name="nombre" value="{{ old('nombre', $subcategory->nombre) }}" required class="border border-gray-300 rounded px-4 py-2">
 
         </div>
 
-        <button type="submit">
+        <div class="mb-4">
+
+            <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+
+            <textarea name="descripcion" class="border border-gray-300 rounded px-4 py-2">{{ old('descripcion', $subcategory->descripcion) }}</textarea>
+
+        </div>
+
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Actualizar
         </button>
 

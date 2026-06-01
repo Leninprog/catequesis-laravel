@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Condiciones Sociales</h1>
+    <h1 class="text-3xl font-bold mb-6">Condiciones Sociales</h1>
 
-    <a href="{{ route('person-conditions.create') }}">
+    <a href="{{ route('person-conditions.create') }}"
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
         Nueva condición
     </a>
 
@@ -10,43 +11,44 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <table border="1" cellpadding="10">
+    <table class="w-full border border-gray-200 rounded">
 
         <tr>
-            <th>Persona</th>
-            <th>Subcategoría</th>
-            <th>Evaluador</th>
-            <th>Nivel</th>
-            <th>Prioridad</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th class="border px-4 py-2">Persona</th>
+            <th class="border px-4 py-2">Subcategoría</th>
+            <th class="border px-4 py-2">Evaluador</th>
+            <th class="border px-4 py-2">Nivel</th>
+            <th class="border px-4 py-2">Prioridad</th>
+            <th class="border px-4 py-2">Estado</th>
+            <th class="border px-4 py-2">Acciones</th>
         </tr>
 
         @foreach ($conditions as $condition)
             <tr>
-                <td>
+                <td class="border px-4 py-2">
                     {{ $condition->person->nombres }}
                     {{ $condition->person->apellidos }}
                 </td>
 
-                <td>
+                <td class="border px-4 py-2">
                     {{ $condition->subcategory->nombre }}
                 </td>
 
-                <td>
+                <td class="border px-4 py-2">
                     {{ $condition->evaluator?->nombres }}
                     {{ $condition->evaluator?->apellidos }}
                 </td>
 
-                <td>{{ $condition->nivel }}</td>
+                <td class="border px-4 py-2">{{ $condition->nivel }}</td>
 
-                <td>{{ $condition->prioridad }}</td>
+                <td class="border px-4 py-2">{{ $condition->prioridad }}</td>
 
-                <td>{{ $condition->estado }}</td>
+                <td class="border px-4 py-2">{{ $condition->estado }}</td>
 
-                <td>
+                <td class="border px-4 py-2">
 
-                    <a href="{{ route('person-conditions.show', $condition) }}">
+                    <a href="{{ route('person-conditions.show', $condition) }}"
+                        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
                         Ver
                     </a>
 

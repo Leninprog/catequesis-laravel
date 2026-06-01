@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-    <h1>Editar Evento</h1>
+    <h1 class="text-3xl font-bold mb-6">Editar Evento</h1>
 
     @if ($errors->any())
-        <div>
+        <div class="mb-4 text-red-600">
             <ul>
 
                 @foreach ($errors->all() as $error)
@@ -15,30 +15,30 @@
         </div>
     @endif
 
-    <form action="{{ route('events.update', $event->id) }}" method="POST">
+    <form class="space-y-4" action="{{ route('events.update', $event->id) }}" method="POST">
 
         @csrf
         @method('PUT')
 
-        <div>
+        <div class="mb-4">
 
-            <label>Nombre</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
 
-            <input type="text" name="nombre" value="{{ old('nombre', $event->nombre) }}" required>
-
-        </div>
-
-        <div>
-
-            <label>Descripción</label>
-
-            <textarea name="descripcion">{{ old('descripcion', $event->descripcion) }}</textarea>
+            <input type="text" name="nombre" value="{{ old('nombre', $event->nombre) }}" required class="border border-gray-300 rounded px-4 py-2">
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Tipo</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+
+            <textarea name="descripcion" class="border border-gray-300 rounded px-4 py-2">{{ old('descripcion', $event->descripcion) }}</textarea>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
 
             <select name="tipo" required>
 
@@ -62,9 +62,9 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Modalidad</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Modalidad</label>
 
             <select name="modalidad" required>
 
@@ -84,33 +84,33 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Cupo máximo</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Cupo máximo</label>
 
-            <input type="number" name="cupo_maximo" value="{{ old('cupo_maximo', $event->cupo_maximo) }}">
+            <input type="number" name="cupo_maximo" value="{{ old('cupo_maximo', $event->cupo_maximo) }}" class="border border-gray-300 rounded px-4 py-2">
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Fecha inicio</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha inicio</label>
 
             <input type="date" name="fecha_inicio" value="{{ old('fecha_inicio', $event->fecha_inicio) }}" required>
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Fecha fin</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha fin</label>
 
             <input type="date" name="fecha_fin" value="{{ old('fecha_fin', $event->fecha_fin) }}" required>
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Estado</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
             <select name="estado" required>
 
@@ -130,7 +130,7 @@
 
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Actualizar
         </button>
 

@@ -1,22 +1,22 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Inscripciones</h1>
+    <h1 class="text-3xl font-bold mb-6">Inscripciones</h1>
 
     @if (session('success'))
-        <div>
+        <div class="mb-4 text-green-600">
             {{ session('success') }}
         </div>
     @endif
 
-    <table border="1" cellpadding="10">
+    <table class="w-full border border-gray-200 rounded">
 
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Persona</th>
-                <th>Evento</th>
-                <th>Fecha</th>
-                <th>Estado</th>
+            <tr class="bg-gray-100">
+                <th class="border px-4 py-2">ID</th>
+                <th class="border px-4 py-2">Persona</th>
+                <th class="border px-4 py-2">Evento</th>
+                <th class="border px-4 py-2">Fecha</th>
+                <th class="border px-4 py-2">Estado</th>
             </tr>
         </thead>
 
@@ -25,24 +25,24 @@
             @forelse($enrollments as $enrollment)
                 <tr>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $enrollment->id }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $enrollment->person->nombres }}
                         {{ $enrollment->person->apellidos }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $enrollment->event->nombre }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $enrollment->fecha_inscripcion }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $enrollment->estado }}
                     </td>
 
@@ -56,7 +56,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit">
+                            <button type="submit" class="border px-4 py-2">
                                 Eliminar
                             </button>
                         </form>
@@ -68,7 +68,7 @@
             @empty
 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="6" class="border px-4 py-2">
                         No hay inscripciones registradas.
                     </td>
                 </tr>

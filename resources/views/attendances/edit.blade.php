@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <h1>Editar Asistencia</h1>
+    <h1 class="text-3xl font-bold mb-6">Editar Asistencia</h1>
 
     @if ($errors->any())
         <ul>
@@ -17,9 +17,9 @@
         @csrf
         @method('PUT')
 
-        <div>
+        <div class="mb-4">
 
-            <label>Inscripción</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Inscripción</label>
 
             <input type="text"
                 value="
@@ -32,9 +32,9 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Estado</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
             <select name="estado" required>
 
@@ -50,17 +50,17 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Observaciones</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Observaciones</label>
 
-            <textarea name="observaciones">
-            {{ $attendance->observaciones }}
-        </textarea>
+            <textarea name="observaciones" class="border border-gray-300 rounded px-4 py-2">
+                {{ $attendance->observaciones }}
+            </textarea>
 
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Actualizar
         </button>
 

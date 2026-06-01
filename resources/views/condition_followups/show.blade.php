@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Detalle del Seguimiento</h1>
+    <h1 class="text-3xl font-bold mb-6">Detalle del Seguimiento</h1>
 
     <p>
         <strong>Persona:</strong>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Nueva Subcategoría</h1>
+    <h1 class="text-3xl font-bold mb-6">Nueva Subcategoría</h1>
 
-    <form action="{{ route('subcategories.store') }}" method="POST">
+    <form class="space-y-4" action="{{ route('subcategories.store') }}" method="POST">
         @csrf
 
         <!-- RELACIÓN CONTROLADA -->
@@ -29,7 +29,7 @@
 
         <input type="text" name="descripcion" placeholder="Descripción">
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Guardar
         </button>
     </form>

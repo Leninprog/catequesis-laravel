@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Eventos</h1>
+    <h1 class="text-3xl font-bold mb-6">Eventos</h1>
 
-    <a href="{{ route('events.create') }}">
+    <a href="{{ route('events.create') }}"
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
         Nuevo Evento
     </a>
 
@@ -11,39 +12,40 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <table border="1">
+    <table class="w-full border border-gray-200 rounded">
 
         <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Modalidad</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th class="border px-4 py-2">Nombre</th>
+            <th class="border px-4 py-2">Tipo</th>
+            <th class="border px-4 py-2">Modalidad</th>
+            <th class="border px-4 py-2">Estado</th>
+            <th class="border px-4 py-2">Acciones</th>
         </tr>
 
         @foreach ($events as $event)
             <tr>
 
-                <td>{{ $event->nombre }}</td>
+                <td class="border px-4 py-2">{{ $event->nombre }}</td>
 
-                <td>{{ $event->tipo }}</td>
+                <td class="border px-4 py-2">{{ $event->tipo }}</td>
 
-                <td>{{ $event->modalidad }}</td>
+                <td class="border px-4 py-2">{{ $event->modalidad }}</td>
 
-                <td>{{ $event->estado }}</td>
+                <td class="border px-4 py-2">{{ $event->estado }}</td>
 
-                <td>
+                <td class="border px-4 py-2">
 
-                    <a href="{{ route('events.edit', $event->id) }}">
+                    <a href="{{ route('events.edit', $event->id) }}"
+                        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
                         Editar
                     </a>
 
-                    <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline;">
+                    <form class="inline" action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline;">
 
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit">
+                        <button type="submit" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
                             Eliminar
                         </button>
 

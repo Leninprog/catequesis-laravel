@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Nueva Condición Social</h1>
+    <h1 class="text-3xl font-bold mb-6">Nueva Condición Social</h1>
 
     @if ($errors->any())
-        <div>
+        <div class="mb-4">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -13,11 +13,11 @@
         </div>
     @endif
 
-    <form action="{{ route('person-conditions.store') }}" method="POST">
+    <form class="space-y-4" action="{{ route('person-conditions.store') }}" method="POST">
         @csrf
 
-        <div>
-            <label>Persona</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Persona</label>
 
             <select name="person_id" required>
                 <option value="">Seleccione</option>
@@ -30,8 +30,8 @@
             </select>
         </div>
 
-        <div>
-            <label>Subcategoría</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Subcategoría</label>
 
             <select name="subcategory_id" required>
                 <option value="">Seleccione</option>
@@ -44,10 +44,10 @@
             </select>
         </div>
 
-        <div>
-            <label>Evaluador</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Evaluador</label>
 
-            <select name="evaluator_id">
+            <select name="evaluator_id" class="border border-gray-300 rounded px-4 py-2">
                 <option value="">Seleccione</option>
 
                 @foreach ($evaluators as $evaluator)
@@ -58,20 +58,20 @@
             </select>
         </div>
 
-        <div>
-            <label>Nivel</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nivel</label>
 
             <input type="number" name="nivel" min="1" max="5" required>
         </div>
 
-        <div>
-            <label>Prioridad</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Prioridad</label>
 
             <input type="number" name="prioridad" min="1" max="5" required>
         </div>
 
-        <div>
-            <label>Estado</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
             <select name="estado" required>
                 <option value="activa">Activa</option>
@@ -80,13 +80,13 @@
             </select>
         </div>
 
-        <div>
-            <label>Observaciones</label>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Observaciones</label>
 
-            <textarea name="observaciones"></textarea>
+            <textarea name="observaciones" class="border border-gray-300 rounded px-4 py-2"></textarea>
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Guardar
         </button>
     </form>

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Categorías</h1>
+    <h1 class="text-3xl font-bold mb-6">Categorías</h1>
 
-    <a href="{{ route('categories.create') }}">
+    <a href="{{ route('categories.create') }}"
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
         Nueva categoría
     </a>
 
@@ -10,19 +11,19 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <table border="1" cellpadding="10">
+    <table class="w-full border border-gray-200 rounded">
 
         <thead>
 
-            <tr>
+            <tr class="bg-gray-100">
 
-                <th>ID</th>
+                <th class="border px-4 py-2">ID</th>
 
-                <th>Nombre</th>
+                <th class="border px-4 py-2">Nombre</th>
 
-                <th>Descripción</th>
+                <th class="border px-4 py-2">Descripción</th>
 
-                <th>Acciones</th>
+                <th class="border px-4 py-2">Acciones</th>
 
             </tr>
 
@@ -33,31 +34,32 @@
             @foreach ($categories as $category)
                 <tr>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $category->id }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $category->nombre }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $category->descripcion }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
 
-                        <a href="{{ route('categories.edit', $category->id) }}">
+                        <a href="{{ route('categories.edit', $category->id) }}"
+                            class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
                             Editar
                         </a>
 
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
+                        <form class="inline" action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
 
                             @csrf
 
                             @method('DELETE')
 
-                            <button type="submit">
+                            <button type="submit" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
                                 Eliminar
                             </button>
 

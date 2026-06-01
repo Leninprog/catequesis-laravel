@@ -1,34 +1,35 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Evaluadores por Evento</h1>
+    <h1 class="text-3xl font-bold mb-6">Evaluadores por Evento</h1>
 
     @if (session('success'))
-        <div>
+        <div class="mb-4 text-green-600">
             {{ session('success') }}
         </div>
     @endif
 
-    <a href="{{ route('event-evaluators.create') }}">
+    <a href="{{ route('event-evaluators.create') }}"
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
         Nueva Asignación
     </a>
 
-    <table border="1" cellpadding="10">
+    <table class="w-full border border-gray-200 rounded">
 
         <thead>
 
             <tr>
 
-                <th>ID</th>
+                <th class="border px-4 py-2">ID</th>
 
-                <th>Evento</th>
+                <th class="border px-4 py-2">Evento</th>
 
-                <th>Evaluador</th>
+                <th class="border px-4 py-2">Evaluador</th>
 
-                <th>Rol</th>
+                <th class="border px-4 py-2">Rol</th>
 
-                <th>Estado</th>
+                <th class="border px-4 py-2">Estado</th>
 
-                <th>Acciones</th>
+                <th class="border px-4 py-2">Acciones</th>
 
             </tr>
 
@@ -39,38 +40,39 @@
             @forelse($eventEvaluators as $eventEvaluator)
                 <tr>
 
-                    <td>{{ $eventEvaluator->id }}</td>
+                    <td class="border px-4 py-2">{{ $eventEvaluator->id }}</td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $eventEvaluator->event->nombre ?? 'Sin evento' }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $eventEvaluator->evaluator->nombres ?? '' }}
                         {{ $eventEvaluator->evaluator->apellidos ?? '' }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $eventEvaluator->rol }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
                         {{ $eventEvaluator->estado }}
                     </td>
 
-                    <td>
+                    <td class="border px-4 py-2">
 
-                        <a href="{{ route('event-evaluators.edit', $eventEvaluator->id) }}">
+                        <a href="{{ route('event-evaluators.edit', $eventEvaluator->id) }}"
+                            class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
                             Editar
                         </a>
 
-                        <form action="{{ route('event-evaluators.destroy', $eventEvaluator->id) }}" method="POST"
+                        <form class="inline" action="{{ route('event-evaluators.destroy', $eventEvaluator->id) }}" method="POST"
                             style="display:inline;">
 
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit">
+                            <button type="submit" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
                                 Eliminar
                             </button>
 

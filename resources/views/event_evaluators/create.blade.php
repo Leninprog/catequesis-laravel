@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Nueva Asignación de Evaluador</h1>
+    <h1 class="text-3xl font-bold mb-6">Nueva Asignación de Evaluador</h1>
 
     @if ($errors->any())
-        <div>
+        <div class="mb-4 text-red-600">
 
             <ul>
 
@@ -17,15 +17,15 @@
         </div>
     @endif
 
-    <form action="{{ route('event-evaluators.store') }}" method="POST">
+    <form class="space-y-4" action="{{ route('event-evaluators.store') }}" method="POST">
 
         @csrf
 
-        <div>
+        <div class="mb-4">
 
-            <label>Evento</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Evento</label>
 
-            <select name="event_id" required>
+            <select name="event_id" required class="border border-gray-300 rounded px-4 py-2">
 
                 <option value="">
                     Seleccione
@@ -41,11 +41,11 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Evaluador</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Evaluador</label>
 
-            <select name="evaluator_id" required>
+            <select name="evaluator_id" required class="border border-gray-300 rounded px-4 py-2">
 
                 <option value="">
                     Seleccione
@@ -62,19 +62,19 @@
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Rol</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Rol</label>
 
-            <input type="text" name="rol" value="{{ old('rol') }}">
+            <input type="text" name="rol" value="{{ old('rol') }}" class="border border-gray-300 rounded px-4 py-2">
 
         </div>
 
-        <div>
+        <div class="mb-4">
 
-            <label>Estado</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
 
-            <select name="estado" required>
+            <select name="estado" required class="border border-gray-300 rounded px-4 py-2">
 
                 <option value="activo">
                     Activo
@@ -88,7 +88,7 @@
 
         </div>
 
-        <button type="submit">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Guardar
         </button>
 
