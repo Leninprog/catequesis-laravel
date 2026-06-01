@@ -19,6 +19,7 @@
             <th>Nivel</th>
             <th>Prioridad</th>
             <th>Estado</th>
+            <th>Acciones</th>
         </tr>
 
         @foreach ($conditions as $condition)
@@ -42,6 +43,14 @@
                 <td>{{ $condition->prioridad }}</td>
 
                 <td>{{ $condition->estado }}</td>
+
+                <td>
+
+                    <a href="{{ route('person-conditions.show', $condition) }}">
+                        Ver
+                    </a>
+
+                </td>
             </tr>
         @endforeach
 

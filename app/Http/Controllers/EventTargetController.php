@@ -60,7 +60,10 @@ class EventTargetController extends Controller
                 $target->nivel_min,
                 $target->nivel_max
             ])
-            ->where('estado', 'activa')
+            ->whereIn('estado', [
+                'activa',
+                'en_seguimiento'
+            ])
             ->get();
 
         /*
@@ -71,21 +74,39 @@ class EventTargetController extends Controller
 
         foreach ($conditions as $condition) {
 
-            Enrollment::create([
+            $exists = Enrollment::where(
+                'person_id',
+                $condition->person_id
+            )
+                ->where(
+                    'event_id',
+                    $target->event_id
+                )
+                ->exists();
 
-                'person_id' => $condition->person_id,
+            if (!$exists) {
 
-                'event_id' => $target->event_id,
+                Enrollment::create([
 
-                'fecha_inscripcion' => now(),
+                    'person_id' =>
+                    $condition->person_id,
 
-                'estado' => 'pendiente',
+                    'event_id' =>
+                    $target->event_id,
 
-                'observaciones' =>
-                'Generado automáticamente por compatibilidad.',
+                    'fecha_inscripcion' =>
+                    now(),
 
-                'created_by' => auth()->id()
-            ]);
+                    'estado' =>
+                    'pendiente',
+
+                    'observaciones' =>
+                    'Generado automáticamente por compatibilidad.',
+
+                    'created_by' =>
+                    auth()->id()
+                ]);
+            }
         }
 
         return redirect()
@@ -124,9 +145,63 @@ class EventTargetController extends Controller
             'nivel_max' => $request->nivel_max
         ]);
 
+        $conditions = PersonCondition::where(
+            'subcategory_id',
+            $eventTarget->subcategory_id
+        )
+            ->whereBetween('nivel', [
+                $eventTarget->nivel_min,
+                $eventTarget->nivel_max
+            ])
+            ->whereIn('estado', [
+                'activa',
+                'en_seguimiento'
+            ])
+            ->get();
+
+        foreach ($conditions as $condition) {
+
+            $exists = Enrollment::where(
+                'person_id',
+                $condition->person_id
+            )
+                ->where(
+                    'event_id',
+                    $eventTarget->event_id
+                )
+                ->exists();
+
+            if (!$exists) {
+
+                Enrollment::create([
+
+                    'person_id' =>
+                    $condition->person_id,
+
+                    'event_id' =>
+                    $eventTarget->event_id,
+
+                    'fecha_inscripcion' =>
+                    now(),
+
+                    'estado' =>
+                    'pendiente',
+
+                    'observaciones' =>
+                    'Generado automáticamente por compatibilidad.',
+
+                    'created_by' =>
+                    auth()->id()
+                ]);
+            }
+        }
+
         return redirect()
             ->route('event-targets.index')
-            ->with('success', 'Objetivo actualizado correctamente.');
+            ->with(
+                'success',
+                'Objetivo actualizado correctamente.'
+            );
     }
 
     public function destroy(EventTarget $eventTarget)

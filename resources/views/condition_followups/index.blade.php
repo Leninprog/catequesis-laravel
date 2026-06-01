@@ -17,7 +17,7 @@
                 <th>Nivel Anterior</th>
                 <th>Nuevo Nivel</th>
                 <th>Fecha</th>
-
+                <th>Acciones</th>
             </tr>
 
         </thead>
@@ -45,6 +45,14 @@
 
                     <td>
                         {{ $followup->fecha }}
+                    </td>
+
+                    <td>
+
+                        <a href="{{ route('condition-followups.show', $followup->id) }}">
+                            Ver
+                        </a>
+
                     </td>
 
                 </tr>
