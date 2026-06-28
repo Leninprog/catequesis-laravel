@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 
+/**
+ * EventController — CORREGIDO
+ *
+ * Bug corregido: 'created_by' => 1 estaba hardcodeado.
+ * Ahora usa auth()->id() correctamente.
+ */
 class EventController extends Controller
 {
     public function index()
@@ -22,24 +28,15 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
         Event::create([
-
-            'nombre' => $request->nombre,
-
+            'nombre'      => $request->nombre,
             'descripcion' => $request->descripcion,
-
-            'tipo' => $request->tipo,
-
-            'modalidad' => $request->modalidad,
-
+            'tipo'        => $request->tipo,
+            'modalidad'   => $request->modalidad,
             'cupo_maximo' => $request->cupo_maximo,
-
             'fecha_inicio' => $request->fecha_inicio,
-
-            'fecha_fin' => $request->fecha_fin,
-
-            'estado' => $request->estado,
-
-            'created_by' => 1
+            'fecha_fin'   => $request->fecha_fin,
+            'estado'      => $request->estado,
+            'created_by'  => auth()->id(), // ✅ CORREGIDO: antes era hardcoded => 1
         ]);
 
         return redirect()
@@ -55,22 +52,14 @@ class EventController extends Controller
     public function update(StoreEventRequest $request, Event $event)
     {
         $event->update([
-
-            'nombre' => $request->nombre,
-
+            'nombre'      => $request->nombre,
             'descripcion' => $request->descripcion,
-
-            'tipo' => $request->tipo,
-
-            'modalidad' => $request->modalidad,
-
+            'tipo'        => $request->tipo,
+            'modalidad'   => $request->modalidad,
             'cupo_maximo' => $request->cupo_maximo,
-
             'fecha_inicio' => $request->fecha_inicio,
-
-            'fecha_fin' => $request->fecha_fin,
-
-            'estado' => $request->estado
+            'fecha_fin'   => $request->fecha_fin,
+            'estado'      => $request->estado,
         ]);
 
         return redirect()

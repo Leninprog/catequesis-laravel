@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PersonCondition;
-use App\Models\Person;
-use App\Models\Subcategory;
+use App\Interfaces\EnrollmentServiceInterface;
 use App\Models\Evaluator;
+use App\Models\Person;
+use App\Models\PersonCondition;
+use App\Models\Subcategory;
 use App\Http\Requests\StorePersonConditionRequest;
-use App\Models\EventTarget;
-use App\Models\Enrollment;
 
+/**
+ * PersonConditionController — REFACTORIZADO
+ *
+ * PRINCIPIO SOLID: Single Responsibility Principle (SRP)
+ * Antes: este controller creaba la condición Y buscaba targets Y creaba enrollments.
+ * Ahora: solo crea la condición y delega la generación de enrollments al servicio.
+ *
+ * PRINCIPIO SOLID: Dependency Inversion Principle (DIP)
+ * Depende de EnrollmentServiceInterface, no de EnrollmentService directamente.
+ */
 class PersonConditionController extends Controller
 {
+    public function __construct(
+        private readonly EnrollmentServiceInterface $enrollmentService
+    ) {}
+
     public function index()
     {
         $conditions = PersonCondition::with([
             'person',
             'subcategory',
-            'evaluator'
+            'evaluator',
         ])->get();
 
         return view('person_conditions.index', compact('conditions'));
@@ -25,11 +38,9 @@ class PersonConditionController extends Controller
 
     public function create()
     {
-        $persons = Person::orderBy('nombres')->get();
-
+        $persons      = Person::orderBy('nombres')->get();
         $subcategories = Subcategory::orderBy('nombre')->get();
-
-        $evaluators = Evaluator::orderBy('nombres')->get();
+        $evaluators   = Evaluator::orderBy('nombres')->get();
 
         return view('person_conditions.create', compact(
             'persons',
@@ -40,120 +51,39 @@ class PersonConditionController extends Controller
 
     public function store(StorePersonConditionRequest $request)
     {
-        $exists = PersonCondition::where(
-            'person_id',
-            $request->person_id
-        )
-            ->where(
-                'subcategory_id',
-                $request->subcategory_id
-            )
-            ->where(
-                'estado',
-                '!=',
-                'resuelta'
-            )
+        // Verificar condición activa duplicada
+        $exists = PersonCondition::where('person_id', $request->person_id)
+            ->where('subcategory_id', $request->subcategory_id)
+            ->where('estado', '!=', 'resuelta')
             ->exists();
 
         if ($exists) {
-
             return back()
                 ->withErrors([
-                    'person_id' =>
-                    'La persona ya tiene una condición activa para esta subcategoría.'
+                    'person_id' => 'La persona ya tiene una condición activa para esta subcategoría.',
                 ])
                 ->withInput();
         }
 
+        // Crear la condición (responsabilidad del controller)
         $condition = PersonCondition::create([
-
-            'person_id' =>
-            $request->person_id,
-
-            'subcategory_id' =>
-            $request->subcategory_id,
-
-            'evaluator_id' =>
-            $request->evaluator_id,
-
-            'nivel' =>
-            $request->nivel,
-
-            'prioridad' =>
-            $request->prioridad,
-
-            'estado' =>
-            $request->estado,
-
-            'observaciones' =>
-            $request->observaciones,
-
-            'fecha_inicio' =>
-            now(),
-
-            'fecha_actualizacion' =>
-            now()
+            'person_id'         => $request->person_id,
+            'subcategory_id'    => $request->subcategory_id,
+            'evaluator_id'      => $request->evaluator_id,
+            'nivel'             => $request->nivel,
+            'prioridad'         => $request->prioridad,
+            'estado'            => $request->estado,
+            'observaciones'     => $request->observaciones,
+            'fecha_inicio'      => now(),
+            'fecha_actualizacion' => now(),
         ]);
 
-        $targets = EventTarget::where(
-            'subcategory_id',
-            $condition->subcategory_id
-        )
-            ->where(
-                'nivel_min',
-                '<=',
-                $condition->nivel
-            )
-            ->where(
-                'nivel_max',
-                '>=',
-                $condition->nivel
-            )
-            ->get();
-
-        foreach ($targets as $target) {
-
-            $exists = Enrollment::where(
-                'person_id',
-                $condition->person_id
-            )
-                ->where(
-                    'event_id',
-                    $target->event_id
-                )
-                ->exists();
-
-            if (!$exists) {
-
-                Enrollment::create([
-
-                    'person_id' =>
-                    $condition->person_id,
-
-                    'event_id' =>
-                    $target->event_id,
-
-                    'fecha_inscripcion' =>
-                    now(),
-
-                    'estado' =>
-                    'pendiente',
-
-                    'observaciones' =>
-                    'Generado automáticamente por compatibilidad.',
-
-                    'created_by' =>
-                    auth()->id()
-                ]);
-            }
-        }
+        // Delegar la generación de inscripciones al servicio (SRP)
+        $this->enrollmentService->generarInscripcionesAutomaticas($condition);
 
         return redirect()
             ->route('person-conditions.index')
-            ->with(
-                'success',
-                'Condición registrada correctamente.'
-            );
+            ->with('success', 'Condición registrada correctamente.');
     }
 
     public function show(PersonCondition $personCondition)
@@ -162,12 +92,9 @@ class PersonConditionController extends Controller
             'person',
             'subcategory',
             'evaluator',
-            'followups'
+            'followups',
         ]);
 
-        return view(
-            'person_conditions.show',
-            compact('personCondition')
-        );
+        return view('person_conditions.show', compact('personCondition'));
     }
 }
